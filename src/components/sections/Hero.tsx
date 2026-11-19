@@ -11,18 +11,19 @@ export function Hero() {
         id="hero-title"
         className="mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl"
       >
-        {words.map((word, i) => (
+        {words.map((word, i) => [
+          i > 0 ? " " : null,
           <m.span
             // biome-ignore lint/suspicious/noArrayIndexKey: static headline, order never changes
             key={i}
-            className="inline-block pr-[0.25em]"
+            className="inline-block"
             initial={reduce ? false : { opacity: 0, y: 28, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.6, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
           >
             {word}
-          </m.span>
-        ))}
+          </m.span>,
+        ])}
       </h1>
       <p className="mt-8 max-w-2xl text-lg text-fog-300">{site.hero.sub}</p>
       <div className="mt-10 flex flex-wrap gap-4">
