@@ -2,7 +2,15 @@ import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 /** Counts from 0 to `to` once the number scrolls into view. */
-export function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
+export function CountUp({
+  to,
+  prefix = "",
+  suffix = "",
+}: {
+  to: number;
+  prefix?: string;
+  suffix?: string;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
@@ -21,10 +29,12 @@ export function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   return (
     <span ref={ref}>
       <span className="sr-only">
+        {prefix}
         {to}
         {suffix}
       </span>
       <span aria-hidden="true">
+        {prefix}
         {value}
         {suffix}
       </span>

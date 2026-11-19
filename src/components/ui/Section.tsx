@@ -14,7 +14,7 @@ export function Section({ id, eyebrow, title, children, className }: Props) {
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className={cn("scroll-mt-24 py-24", className)}
+      className={cn("container-page scroll-mt-24 py-24", className)}
     >
       <p className="font-mono text-sm text-accent">{eyebrow}</p>
       <h2

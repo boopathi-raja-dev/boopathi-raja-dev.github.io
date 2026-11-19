@@ -25,7 +25,7 @@ export const Route = createFileRoute("/work/$slug")({
 function CaseStudyPage() {
   const study = Route.useLoaderData();
   return (
-    <article className="mx-auto max-w-3xl py-20">
+    <article className="mx-auto max-w-3xl px-6 py-20">
       <Link
         to="/"
         hash="work"
