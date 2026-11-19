@@ -69,7 +69,7 @@ tests/
 
 ## Deploying
 
-Push to `main`. The **Deploy to GitHub Pages** workflow builds the site and publishes `dist/client`.
+Push to `main`. The **CI / Deploy** workflow runs every check (lint, types, unit tests, build, e2e + accessibility, Lighthouse) and only if all of them pass does it publish that exact build (`dist/client`) to GitHub Pages. Pull requests run the checks without deploying.
 One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
 
 ## Roadmap

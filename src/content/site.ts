@@ -1,60 +1,11 @@
-import { z } from "zod";
-
-const link = z.object({ label: z.string(), href: z.url() });
-
-export const siteSchema = z.object({
-  name: z.string(),
-  role: z.string(),
-  location: z.string(),
-  url: z.url(),
-  description: z.string().max(160),
-  email: z.email(),
-  links: z.object({ github: z.url(), linkedin: z.url() }),
-  hero: z.object({
-    eyebrow: z.string(),
-    headline: z.string(),
-    sub: z.string(),
-  }),
-  proof: z
-    .array(
-      z.object({
-        value: z.number(),
-        prefix: z.string().default(""),
-        suffix: z.string().default(""),
-        label: z.string(),
-      }),
-    )
-    .length(4),
-  projects: z.array(
-    z.object({
-      name: z.string(),
-      blurb: z.string(),
-      stack: z.array(z.string()),
-      repo: z.url(),
-    }),
-  ),
-  skills: z.array(z.object({ group: z.string(), items: z.array(z.string()).min(1) })),
-  experience: z.array(
-    z.object({
-      company: z.string(),
-      title: z.string(),
-      period: z.string(),
-      points: z.array(z.string()),
-    }),
-  ),
-  certifications: z.array(z.string()),
-  about: z.array(z.string()),
-  nav: z.array(link.extend({ href: z.string() })),
-});
-
-export type Site = z.infer<typeof siteSchema>;
+import type { Site } from "./site.schema";
 
 /**
- * All copy for the site lives here. Validated with zod at import time,
- * so a typo in the shape fails `pnpm build` and the unit tests.
+ * All copy for the site lives here. Its shape is checked by TypeScript and
+ * validated against `siteSchema` in the unit tests.
  * Client names are intentionally left out (public site).
  */
-export const site: Site = siteSchema.parse({
+export const site = {
   name: "Boopathi Raja",
   role: "Frontend Engineer",
   location: "Chennai, India",
@@ -148,4 +99,4 @@ export const site: Site = siteSchema.parse({
     { label: "Experience", href: "/#experience" },
     { label: "Contact", href: "/#contact" },
   ],
-});
+} satisfies Site;

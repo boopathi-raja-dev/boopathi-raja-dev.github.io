@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { site, siteSchema } from "~/content/site";
+import { site } from "~/content/site";
+import { siteSchema } from "~/content/site.schema";
 
 describe("site content", () => {
   it("matches the schema", () => {
