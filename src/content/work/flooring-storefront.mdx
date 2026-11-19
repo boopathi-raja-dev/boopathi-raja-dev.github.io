@@ -11,12 +11,15 @@ stack: [Angular, TypeScript, Angular SSR, RxJS, NgRx, Headless CMS, SCSS, Jasmin
 visual: bars
 decisions:
   - title: Render on the server
-    body: SSR gave search engines and slow connections real HTML on first load, and drove most of the Lighthouse gain.
+    body: SSR gave search engines and slow connections real HTML on first load. Together with lazy loading and image optimisation, it lifted the Lighthouse score by 20 points.
   - title: Components the CMS can compose
     body: Each CMS component was a self-contained building block, so new pages needed content, not code.
   - title: Virtualise long lists
     body: Rendering only the visible rows kept large product lists smooth.
 result: A faster, search-friendly storefront for a global flooring brand, +20 Lighthouse points, and marketing pages built without developer help.
+improvements:
+  - Measure each speed change separately with Lighthouse CI, to know exactly what produced the +20.
+  - Add Core Web Vitals monitoring from real users, not only lab scores.
 order: 3
 ---
 

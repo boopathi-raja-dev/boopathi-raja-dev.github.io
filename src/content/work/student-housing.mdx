@@ -18,6 +18,9 @@ decisions:
   - title: Break up large components
     body: I refactored oversized screens into custom hooks and smaller files, which made them testable and fixed a race condition in debounced auto-save along the way.
 result: Admins manage allocation down to the individual bed, and students upload documents straight from their phones.
+improvements:
+  - Track upload failures by file type, to see how often bad files are caught before they reach S3.
+  - Add usage tracking, so results can be shown with real numbers (beds allocated, documents uploaded).
 order: 2
 ---
 

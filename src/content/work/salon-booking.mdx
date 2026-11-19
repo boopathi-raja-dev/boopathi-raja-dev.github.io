@@ -12,12 +12,16 @@ stack: [React, TypeScript, Ant Design, React Query, Context API, FullCalendar, S
 visual: calendar
 decisions:
   - title: Staff leave as blocked time on the calendar
-    body: Showing leave directly in the scheduler stopped the front desk from booking someone who was off.
+    body: Leave shows straight on the scheduler, as blocked background time in day view and as leave entries in week and month views, so the front desk can see who's off before booking.
   - title: Server state in React Query, UI state in Context
-    body: API data was cached and refetched on its own. Context held only what the screen needed, which kept re-renders low on a busy calendar.
+    body: React Query cached and refetched the API data, so screens stayed in sync without manual fetching. Context held only the shared UI state the screens needed.
   - title: Mock the network in tests
     body: MSW let the booking and payment flows be tested end to end in Vitest without a backend.
 result: Three production apps shipped over about a year. Salons run bookings, payments and staff schedules from one product.
+improvements:
+  - Block a booking at form validation when the chosen staff member is on leave, not only show the leave on the calendar.
+  - Profile the busy calendar with React Profiler and split Context so one change doesn't re-render the whole view.
+  - Add usage tracking, so results can be shown with real numbers.
 order: 1
 ---
 
