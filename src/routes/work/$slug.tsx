@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { CaseVisual } from "~/components/work/CaseVisual";
 import { Scheduler } from "~/components/work/Scheduler";
 import { site } from "~/content/site";
-import { seo } from "~/lib/seo";
+import { canonical, seo } from "~/lib/seo";
 
 const ordered = () => [...allCaseStudies].sort((a, b) => a.order - b.order);
 
@@ -26,6 +26,7 @@ export const Route = createFileRoute("/work/$slug")({
           path: `/work/${params.slug}/`,
         })
       : [],
+    links: [canonical(`/work/${params.slug}/`)],
   }),
   component: CaseStudyPage,
 });
