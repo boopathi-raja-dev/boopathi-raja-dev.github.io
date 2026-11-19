@@ -41,6 +41,9 @@
     html {
       scroll-behavior: auto;
     }
+    .rise {
+      animation: none !important;
+    }
     *,
     *::before,
     *::after {
@@ -51,6 +54,12 @@
 }
 
 @layer components {
+  /* Entrance animation for above-the-fold content. Pure CSS so it starts at first
+     paint, without waiting for JavaScript (keeps Largest Contentful Paint fast). */
+  .rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delay, 0s);
+  }
   /* Faint 48px blue grid behind the hero, as in the design. */
   .bg-grid {
     background-image:
@@ -69,5 +78,12 @@
   }
   .prose-case ul {
     @apply list-disc pl-5 space-y-2 text-fog-300 mb-4;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
 }

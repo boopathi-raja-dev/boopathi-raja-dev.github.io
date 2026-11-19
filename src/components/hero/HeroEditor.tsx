@@ -1,6 +1,7 @@
 import { AnimatePresence, m, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import { site } from "~/content/site";
+import { useIdle } from "~/hooks/useIdle";
 import { useTypewriter } from "~/hooks/useTypewriter";
 import { cn } from "~/lib/cn";
 import { highlight, type TokenKind } from "./highlight";
@@ -28,7 +29,9 @@ export function HeroEditor() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const inView = useInView(ref, { once: true, amount: 0.4 });
-  const { output, done } = useTypewriter(CODE, { speed: 32, enabled: inView });
+  // Start typing only once the page has settled, so it never competes with loading.
+  const idle = useIdle();
+  const { output, done } = useTypewriter(CODE, { speed: 32, enabled: inView && idle });
 
   return (
     <m.figure
