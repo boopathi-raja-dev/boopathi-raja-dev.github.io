@@ -1,5 +1,9 @@
-import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "~/hooks/useInView";
+import { useReducedMotion } from "~/hooks/useReducedMotion";
+
+const DURATION = 1400;
+const easeOut = (t: number) => 1 - (1 - t) ** 3;
 
 /** Counts from 0 to `to` once the number scrolls into view. */
 export function CountUp({
@@ -12,18 +16,25 @@ export function CountUp({
   suffix?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref, 0.6);
   const reduce = useReducedMotion();
-  const [value, setValue] = useState(reduce ? to : 0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!inView || reduce) return;
-    const controls = animate(0, to, {
-      duration: 1.4,
-      ease: "easeOut",
-      onUpdate: (v) => setValue(Math.round(v)),
-    });
-    return () => controls.stop();
+    if (!inView) return;
+    if (reduce) {
+      setValue(to);
+      return;
+    }
+    let frame = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / DURATION);
+      setValue(Math.round(easeOut(t) * to));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, [inView, reduce, to]);
 
   return (

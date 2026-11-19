@@ -1,13 +1,14 @@
 import { Section } from "~/components/ui/Section";
 import { site } from "~/content/site";
 import { cn } from "~/lib/cn";
+import { stagger } from "~/lib/stagger";
 
 export function Projects() {
   return (
     <Section id="projects" eyebrow="02 / Projects" title="Things I build on my own time">
       <ul className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5">
-        {site.projects.map((p) => (
-          <li key={p.href} className="flex">
+        {site.projects.map((p, i) => (
+          <li key={p.href} className="reveal flex" style={stagger(i)}>
             <a
               href={p.href}
               className={cn(

@@ -5,16 +5,16 @@ Live at **https://boopathi-raja-dev.github.io**.
 
 ## Stack
 
-| Area      | Choice                                                                                            |
-| --------- | ------------------------------------------------------------------------------------------------- |
-| Framework | TanStack Start (React 19) + TanStack Router, fully prerendered to static HTML                     |
-| Language  | TypeScript (strict, `noUncheckedIndexedAccess`)                                                   |
-| Styling   | Tailwind CSS v4 with design tokens in `src/styles/app.css`                                        |
-| Motion    | Motion (`motion/react`) with `LazyMotion`, respects `prefers-reduced-motion`                      |
-| Content   | Site copy validated with zod (`src/content/site.ts`); case studies in MDX via content-collections |
-| Quality   | Biome (lint + format), Vitest + Testing Library, Playwright + axe, Lighthouse CI                  |
-| Workflow  | pnpm, Husky + lint-staged, commitlint (Conventional Commits), Renovate                            |
-| Deploy    | GitHub Actions → GitHub Pages                                                                     |
+| Area      | Choice                                                                                                                 |
+| --------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Framework | TanStack Start (React 19) + TanStack Router, fully prerendered to static HTML                                          |
+| Language  | TypeScript (strict, `noUncheckedIndexedAccess`)                                                                        |
+| Styling   | Tailwind CSS v4 with design tokens in `src/styles/app.css`                                                             |
+| Motion    | CSS keyframes + small hooks (`useInView`, `useReducedMotion`), no animation library; respects `prefers-reduced-motion` |
+| Content   | Site copy validated with zod (`src/content/site.ts`); case studies in MDX via content-collections                      |
+| Quality   | Biome (lint + format), Vitest + Testing Library, Playwright + axe, Lighthouse CI                                       |
+| Workflow  | pnpm, Husky + lint-staged, commitlint (Conventional Commits), Renovate                                                 |
+| Deploy    | GitHub Actions → GitHub Pages                                                                                          |
 
 ## Getting started
 

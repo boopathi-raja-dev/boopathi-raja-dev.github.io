@@ -12,7 +12,7 @@ export function ExperienceAbout() {
         <SectionHeader id="experience" eyebrow="04 / Experience" title="Where I've worked" />
         <ol className="border-l-2 border-line pl-6">
           {site.experience.map((e) => (
-            <li key={e.title} className="flex flex-col gap-1.5 pb-7 last:pb-0">
+            <li key={e.title} className="reveal flex flex-col gap-1.5 pb-7 last:pb-0">
               <p className="font-mono text-[13px] text-fog-400">{e.period}</p>
               <h3 className="text-lg font-semibold text-white">
                 {e.title} · {e.org}
@@ -21,7 +21,7 @@ export function ExperienceAbout() {
             </li>
           ))}
         </ol>
-        <ul className="flex flex-wrap gap-2.5" aria-label="Certifications">
+        <ul className="reveal flex flex-wrap gap-2.5" aria-label="Certifications">
           {site.certifications.map((c) => (
             <li
               key={c}
@@ -36,7 +36,7 @@ export function ExperienceAbout() {
       <aside
         id="about"
         aria-label="About me"
-        className="flex min-w-0 flex-[1_1_360px] scroll-mt-20 flex-col gap-5 self-start rounded-2xl border border-line bg-ink-900 p-8"
+        className="reveal flex min-w-0 flex-[1_1_360px] scroll-mt-20 flex-col gap-5 self-start rounded-2xl border border-line bg-ink-900 p-8"
       >
         <div className="flex items-center gap-3.5">
           <img

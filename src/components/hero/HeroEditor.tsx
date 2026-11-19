@@ -1,7 +1,7 @@
-import { AnimatePresence, m, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import { site } from "~/content/site";
 import { useIdle } from "~/hooks/useIdle";
+import { useInView } from "~/hooks/useInView";
 import { useTypewriter } from "~/hooks/useTypewriter";
 import { cn } from "~/lib/cn";
 import { highlight, type TokenKind } from "./highlight";
@@ -27,20 +27,17 @@ const TOKEN_CLASS: Record<TokenKind, string> = {
 
 export function HeroEditor() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const inView = useInView(ref, 0.4);
   // Start typing only once the page has settled, so it never competes with loading.
   const idle = useIdle();
   const { output, done } = useTypewriter(CODE, { speed: 32, enabled: inView && idle });
 
   return (
-    <m.figure
+    <figure
       ref={ref}
       aria-label={`Code sample: a React component describing ${site.name}, a frontend engineer in Chennai working with React, TypeScript and AWS.`}
-      // Gentle idle float, as in the design.
-      animate={reduce ? undefined : { y: [0, -8, 0] }}
-      transition={{ duration: 6, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
-      className="overflow-hidden rounded-[14px] border border-[#24344f] bg-ink-975 shadow-[0_30px_60px_rgb(0_0_0/0.45)]"
+      // "float" = gentle idle bob, as in the design (CSS, off for reduced motion).
+      className="float overflow-hidden rounded-[14px] border border-[#24344f] bg-ink-975 shadow-[0_30px_60px_rgb(0_0_0/0.45)]"
     >
       <div aria-hidden="true">
         {/* Window chrome */}
@@ -73,31 +70,24 @@ export function HeroEditor() {
 
         {/* "Rendered" result appears once typing finishes. Its space is reserved to avoid a jump. */}
         <div className="h-[82px] px-4 pb-4">
-          <AnimatePresence>
-            {done ? (
-              <m.div
-                initial={reduce ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-                className="flex items-center gap-3 rounded-[10px] border border-[#24344f] bg-[#13213a] px-3.5 py-3"
-              >
-                <img
-                  src="/avatar.webp"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="size-10 rounded-full object-cover"
-                />
-                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                  <span className="text-sm font-semibold text-white">{site.name}</span>
-                  <span className="text-xs text-fog-400">React · TypeScript · AWS</span>
-                </div>
-                <span className="font-mono text-xs text-[#34d399]">✓ Rendered</span>
-              </m.div>
-            ) : null}
-          </AnimatePresence>
+          {done ? (
+            <div className="rise flex items-center gap-3 rounded-[10px] border border-[#24344f] bg-[#13213a] px-3.5 py-3">
+              <img
+                src="/avatar.webp"
+                alt=""
+                width={40}
+                height={40}
+                className="size-10 rounded-full object-cover"
+              />
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <span className="text-sm font-semibold text-white">{site.name}</span>
+                <span className="text-xs text-fog-400">React · TypeScript · AWS</span>
+              </div>
+              <span className="font-mono text-xs text-[#34d399]">✓ Rendered</span>
+            </div>
+          ) : null}
         </div>
       </div>
-    </m.figure>
+    </figure>
   );
 }

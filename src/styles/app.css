@@ -41,7 +41,8 @@
     html {
       scroll-behavior: auto;
     }
-    .rise {
+    .rise,
+    .float {
       animation: none !important;
     }
     *,
@@ -88,5 +89,74 @@
   from {
     opacity: 0;
     transform: translateY(28px);
+  }
+}
+
+/* Idle float for the hero editor. */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Case-card illustrations (played from CaseVisual). */
+@keyframes cell-pulse {
+  0%,
+  100% {
+    background-color: #1e3a5f;
+  }
+  30%,
+  60% {
+    background-color: #7dd3fc;
+  }
+}
+
+@keyframes node-glow {
+  0%,
+  100% {
+    border-color: #334155;
+    color: #94a3b8;
+    box-shadow: none;
+  }
+  40% {
+    border-color: #7dd3fc;
+    color: #7dd3fc;
+    box-shadow: 0 0 18px rgb(125 211 252 / 0.35);
+  }
+}
+
+@keyframes bar-grow {
+  0%,
+  100% {
+    height: 54px;
+  }
+  35%,
+  85% {
+    height: 92px;
+  }
+}
+
+/* Scroll reveal: pure CSS scroll-driven animation (no JavaScript).
+   Each `.reveal` element fades up as it enters the viewport. `--reveal-i` staggers
+   items that enter together (e.g. cards in one row). Browsers without
+   `animation-timeline` (and reduced-motion users) just see the content. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-i, 0) * 6%) cover calc(22% + var(--reveal-i, 0) * 6%);
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
   }
 }

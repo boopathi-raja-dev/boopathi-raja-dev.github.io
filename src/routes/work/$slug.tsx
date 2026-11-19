@@ -93,7 +93,7 @@ function CaseStudyPage() {
             {study.visual === "calendar" ? (
               <Scheduler />
             ) : (
-              <CaseVisual kind={study.visual} play loop className="rounded-lg border-0" />
+              <CaseVisual kind={study.visual} play loop framed={false} />
             )}
           </div>
         </figure>
@@ -114,7 +114,7 @@ function CaseStudyPage() {
               {study.decisions.map((d, i) => (
                 <li
                   key={d.title}
-                  className="flex gap-4 rounded-xl border border-line bg-ink-900 p-5"
+                  className="reveal flex gap-4 rounded-xl border border-line bg-ink-900 p-5"
                 >
                   <span className="font-mono text-sm text-accent">
                     {String(i + 1).padStart(2, "0")}
@@ -128,14 +128,14 @@ function CaseStudyPage() {
             </ol>
           </section>
 
-          <section aria-labelledby="result-title" className="flex flex-col gap-3">
+          <section aria-labelledby="result-title" className="reveal flex flex-col gap-3">
             <h2 id="result-title" className="font-display text-[28px] font-semibold text-white">
               Result
             </h2>
             <p className="text-lg leading-relaxed text-fog-200">{study.result}</p>
           </section>
 
-          <section aria-labelledby="next-title" className="flex flex-col gap-4">
+          <section aria-labelledby="next-title" className="reveal flex flex-col gap-4">
             <h2 id="next-title" className="font-display text-[28px] font-semibold text-white">
               What I'd improve next
             </h2>

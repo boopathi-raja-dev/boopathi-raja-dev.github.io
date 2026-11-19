@@ -11,7 +11,7 @@ export function Contact() {
       aria-labelledby="contact-title"
       className="bg-grid mt-12 scroll-mt-16 border-t border-line"
     >
-      <div className="container-page flex flex-col items-center gap-5 py-24 text-center">
+      <div className="reveal container-page flex flex-col items-center gap-5 py-24 text-center">
         <p className="font-mono text-sm text-accent">05 / Contact</p>
         <h2
           id="contact-title"
