@@ -1,23 +1,26 @@
 import { Link } from "@tanstack/react-router";
 import { allCaseStudies } from "content-collections";
-import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
-import { Reveal } from "~/components/ui/Reveal";
+import { useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { Section } from "~/components/ui/Section";
 import { CaseVisual } from "~/components/work/CaseVisual";
 
 type Study = (typeof allCaseStudies)[number];
 
+export const studiesInOrder = () => [...allCaseStudies].sort((a, b) => a.order - b.order);
+
 export function WorkCards() {
-  const studies = [...allCaseStudies].sort((a, b) => a.order - b.order);
   return (
-    <Section id="work" eyebrow="01 / Selected work" title="Products I've helped ship">
-      <ul className="grid gap-6 md:grid-cols-3">
-        {studies.map((study, i) => (
-          <li key={study.slug}>
-            <Reveal delay={i * 0.08}>
-              <WorkCard study={study} />
-            </Reveal>
+    <Section
+      id="work"
+      eyebrow="01 / Selected work"
+      title="Products I helped ship"
+      className="pt-24"
+    >
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+        {studiesInOrder().map((study) => (
+          <li key={study.slug} className="flex">
+            <WorkCard study={study} />
           </li>
         ))}
       </ul>
@@ -26,35 +29,50 @@ export function WorkCards() {
 }
 
 function WorkCard({ study }: { study: Study }) {
-  // The card's illustration plays while it's hovered or keyboard-focused.
-  const [active, setActive] = useState(false);
+  const ref = useRef<HTMLAnchorElement>(null);
+  // Plays one cycle when the card first scrolls into view, then loops only while hovered/focused,
+  // so three animations never compete with reading.
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const [intro, setIntro] = useState(false);
+  const [hover, setHover] = useState(false);
+
+  useEffect(() => {
+    if (!inView) return;
+    setIntro(true);
+    const t = setTimeout(() => setIntro(false), 3500);
+    return () => clearTimeout(t);
+  }, [inView]);
+
   return (
     <Link
+      ref={ref}
       to="/work/$slug"
       params={{ slug: study.slug }}
-      onPointerEnter={() => setActive(true)}
-      onPointerLeave={() => setActive(false)}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
-      className="group flex h-full flex-col rounded-2xl border border-ink-800 bg-ink-900 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/5"
+      onPointerEnter={() => setHover(true)}
+      onPointerLeave={() => setHover(false)}
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+      className="group flex w-full flex-col overflow-hidden rounded-2xl border border-line bg-ink-900 text-fog-100 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#2e4a70] hover:shadow-[0_18px_40px_rgb(0_0_0/0.35)]"
     >
-      <CaseVisual slug={study.slug} active={active} />
-      <p className="font-mono text-xs text-accent">{study.category}</p>
-      <h3 className="mt-3 flex items-start justify-between gap-2 font-display text-xl font-semibold">
-        {study.title}
-        <ArrowUpRight
-          aria-hidden="true"
-          className="size-5 shrink-0 text-fog-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
-        />
-      </h3>
-      <p className="mt-3 flex-1 text-sm text-fog-300">{study.summary}</p>
-      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Tags">
-        {study.tags.map((t) => (
-          <li key={t} className="rounded-full bg-ink-800 px-3 py-1 text-xs text-fog-300">
-            {t}
-          </li>
-        ))}
-      </ul>
+      <CaseVisual kind={study.visual} play={hover || intro} loop={hover} />
+      <div className="flex flex-1 flex-col gap-3 p-6">
+        <p className="text-[13px] text-fog-400">
+          {study.label} · {study.durationShort}
+        </p>
+        <h3 className="font-display text-[22px] leading-snug font-semibold text-white">
+          {study.title}
+        </h3>
+        <ul className="mt-auto flex flex-wrap gap-2 pt-2" aria-label="Tech used">
+          {study.cardTags.map((t) => (
+            <li key={t} className="rounded-full bg-[#13213a] px-2.5 py-1 text-xs text-fog-200">
+              {t}
+            </li>
+          ))}
+        </ul>
+        <span className="text-sm font-semibold text-accent">
+          Read case study <span aria-hidden="true">→</span>
+        </span>
+      </div>
     </Link>
   );
 }

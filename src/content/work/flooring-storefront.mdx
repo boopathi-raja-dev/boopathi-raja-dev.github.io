@@ -1,25 +1,32 @@
 ---
-title: Flooring storefront
-category: E-commerce
-summary: A product storefront with catalogue browsing, filters and product detail pages for a flooring business.
-duration: Project
+title: A content-managed Angular storefront, made faster and easier to find
+label: Commercial flooring storefront
+durationShort: ~6–8 months
+duration: About 6–8 months
 role: Frontend engineer
-stack: [React, TypeScript, AWS S3, CloudFront]
-tags: [Catalogue, Filters, Performance]
+factsStack: Angular, SSR, NgRx, Headless CMS
+summary: Commercial flooring buyers browse large catalogues and need a local retailer. I made the storefront render on the server, load faster and let the marketing team build pages without developers.
+cardTags: [Angular, SSR, NgRx, Headless CMS]
+stack: [Angular, TypeScript, Angular SSR, RxJS, NgRx, Headless CMS, SCSS, Jasmine, Karma]
+visual: bars
+decisions:
+  - title: Render on the server
+    body: SSR gave search engines and slow connections real HTML on first load, and drove most of the Lighthouse gain.
+  - title: Components the CMS can compose
+    body: Each CMS component was a self-contained building block, so new pages needed content, not code.
+  - title: Virtualise long lists
+    body: Rendering only the visible rows kept large product lists smooth.
+result: A faster, search-friendly storefront for a global flooring brand, +20 Lighthouse points, and marketing pages built without developer help.
 order: 3
 ---
 
 ## The problem
 
-Customers needed to browse a large catalogue of flooring products and compare options quickly on any device.
+Buyers browse large catalogues and need to find a local retailer. The marketing team needed to build and change pages without developers, and the site needed to load fast and rank well in search.
 
-## What I built
+## What I did
 
-- Catalogue listing with filters and sorting
-- Product detail pages with specifications and imagery
-- Static deploy to S3 + CloudFront via CI
-
-## Outcome
-
-{/* TODO(Boopathi): add a real number if you have one */}
-Shipped to production for the client.
+- Raised the Lighthouse score by **20 points** with server-side rendering, SEO metadata, lazy loading and image optimisation.
+- Built **25+ reusable CMS components**, so the marketing team could assemble pages themselves.
+- Built a PDF catalogue generator and a Google Maps retailer search.
+- Built reactive forms and virtual scrolling for large product lists, with state in RxJS and NgRx.

@@ -1,7 +1,20 @@
 import { Link } from "@tanstack/react-router";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { site } from "~/content/site";
+import { cn } from "~/lib/cn";
 
 export function Nav() {
+  const [open, setOpen] = useState(false);
+
+  // Close the mobile menu with Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-ink-950/90 backdrop-blur">
       <nav
@@ -10,7 +23,7 @@ export function Nav() {
       >
         <Link
           to="/"
-          className="flex items-center gap-2.5 font-display text-lg font-bold text-white"
+          className="flex items-center gap-2.5 font-display text-lg font-bold whitespace-nowrap text-white"
         >
           <img
             src="/avatar.webp"
@@ -19,9 +32,10 @@ export function Nav() {
             height={32}
             className="size-8 rounded-full border border-ink-700 object-cover"
           />
-          <span className="font-mono text-base text-accent">&lt;/&gt;</span>
+          <span className="hidden font-mono text-base text-accent sm:inline">&lt;/&gt;</span>
           {site.name}
         </Link>
+
         <div className="flex items-center gap-6 text-[15px]">
           <ul className="hidden gap-6 text-fog-200 md:flex">
             {site.nav.map((item) => (
@@ -38,8 +52,45 @@ export function Nav() {
           >
             Resume
           </a>
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((o) => !o)}
+            className="-mr-2 inline-flex p-2 text-fog-200 md:hidden"
+          >
+            {open ? (
+              <X aria-hidden="true" className="size-6" />
+            ) : (
+              <Menu aria-hidden="true" className="size-6" />
+            )}
+          </button>
         </div>
       </nav>
+
+      <div
+        id="mobile-menu"
+        hidden={!open}
+        className={cn(
+          "border-t border-line bg-ink-950 md:hidden",
+          open && "animate-[rise_0.25s_ease-out]",
+        )}
+      >
+        <ul className="container-page flex flex-col py-2">
+          {site.nav.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block py-3 text-lg text-fog-100 transition-colors hover:text-accent"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }

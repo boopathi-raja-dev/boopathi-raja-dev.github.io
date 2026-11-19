@@ -3,18 +3,12 @@ import { site } from "~/content/site";
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="03 / Toolbox" title="What I work with">
-      <dl className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <Section id="skills" eyebrow="03 / Skills" title="What I work with">
+      <dl className="grid border-t border-line md:grid-cols-2 md:gap-x-6">
         {site.skills.map((s) => (
-          <div key={s.group}>
-            <dt className="font-mono text-sm text-fog-500">{s.group}</dt>
-            <dd className="mt-3 flex flex-wrap gap-2">
-              {s.items.map((item) => (
-                <span key={item} className="rounded-md border border-ink-700 px-2.5 py-1 text-sm">
-                  {item}
-                </span>
-              ))}
-            </dd>
+          <div key={s.group} className="flex gap-5 border-b border-line py-5 pr-6">
+            <dt className="w-[120px] shrink-0 font-semibold text-white">{s.group}</dt>
+            <dd className="leading-relaxed text-fog-200">{s.items}</dd>
           </div>
         ))}
       </dl>

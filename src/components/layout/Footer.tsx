@@ -2,20 +2,12 @@ import { site } from "~/content/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-ink-800 py-10 text-sm text-fog-500">
-      <div className="container-page flex flex-col justify-between gap-4 md:flex-row">
+    <footer className="border-t border-line">
+      <div className="container-page flex flex-wrap justify-between gap-3 py-7 text-sm text-fog-400">
         <p>
-          © {new Date().getFullYear()} {site.name}. Built with TanStack Start, React and Motion.
+          © {new Date().getFullYear()} {site.name}
         </p>
-        <p>
-          <a href={site.links.github} className="hover:text-fog-100">
-            GitHub
-          </a>
-          {" · "}
-          <a href={site.links.linkedin} className="hover:text-fog-100">
-            LinkedIn
-          </a>
-        </p>
+        <p>Built with TanStack Start · Deployed with GitHub Actions</p>
       </div>
     </footer>
   );

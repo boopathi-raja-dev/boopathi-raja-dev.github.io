@@ -11,8 +11,8 @@ describe("site content", () => {
     expect(site.description.length).toBeLessThanOrEqual(160);
   });
 
-  it("has unique project repos", () => {
-    const repos = site.projects.map((p) => p.repo);
+  it("has unique project links", () => {
+    const repos = site.projects.map((p) => p.href);
     expect(new Set(repos).size).toBe(repos.length);
   });
 });
