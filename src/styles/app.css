@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+@theme {
+  --color-ink-950: #0b1424;
+  --color-ink-900: #0f1b2d;
+  --color-ink-800: #16253b;
+  --color-ink-700: #22344f;
+  --color-fog-100: #e6edf6;
+  --color-fog-300: #a9b8cc;
+  --color-fog-500: #8091a8;
+  --color-accent: #7dd3fc;
+  --color-accent-strong: #38bdf8;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-950 text-fog-100 font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-accent text-ink-950;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .prose-case h2 {
+    @apply font-display text-2xl font-semibold text-fog-100 mt-12 mb-4;
+  }
+  .prose-case p {
+    @apply text-fog-300 leading-relaxed mb-4;
+  }
+  .prose-case ul {
+    @apply list-disc pl-5 space-y-2 text-fog-300 mb-4;
+  }
+}

@@ -1,0 +1,13 @@
+node_modules
+.output
+dist
+.vinxi
+.tanstack
+.content-collections
+.lighthouseci
+playwright-report
+test-results
+coverage
+.env*
+!.env.example
+.DS_Store
