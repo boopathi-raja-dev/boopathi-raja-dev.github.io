@@ -1,29 +1,34 @@
 import type { ReactNode } from "react";
 import { cn } from "~/lib/cn";
 
-type Props = {
-  id: string;
-  eyebrow: string;
-  title: string;
-  children: ReactNode;
-  className?: string;
-};
+type HeaderProps = { id: string; eyebrow: string; title: string };
+
+/** Mono eyebrow ("01 / Selected work") above a section title, as in the design. */
+export function SectionHeader({ id, eyebrow, title }: HeaderProps) {
+  return (
+    <div className="flex flex-col gap-2.5">
+      <p className="font-mono text-sm text-accent">{eyebrow}</p>
+      <h2
+        id={`${id}-title`}
+        className="font-display text-[32px] leading-tight font-bold text-white md:text-[40px]"
+      >
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+type Props = HeaderProps & { children: ReactNode; className?: string };
 
 export function Section({ id, eyebrow, title, children, className }: Props) {
   return (
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className={cn("container-page scroll-mt-24 py-24", className)}
+      className={cn("container-page flex scroll-mt-20 flex-col gap-8 py-12", className)}
     >
-      <p className="font-mono text-sm text-accent">{eyebrow}</p>
-      <h2
-        id={`${id}-title`}
-        className="mt-2 font-display text-3xl font-semibold tracking-tight md:text-4xl"
-      >
-        {title}
-      </h2>
-      <div className="mt-10">{children}</div>
+      <SectionHeader id={id} eyebrow={eyebrow} title={title} />
+      {children}
     </section>
   );
 }

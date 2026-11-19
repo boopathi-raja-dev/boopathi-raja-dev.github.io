@@ -1,31 +1,34 @@
 ---
-title: Salon booking platform
-category: Booking & scheduling
-summary: A multi-location booking system where staff manage appointments, services and availability from one calendar.
-duration: Ongoing
+title: Booking, scheduling and payments across three apps
+label: Salon & spa SaaS
+durationShort: ~12 months
+duration: About 12 months
 role: Frontend engineer
-apps: Admin web app
-stack: [React, TypeScript, Ant Design, Zustand, TanStack Query]
-tags: [Calendar, Scheduling, Multi-location]
+apps: Super Admin · Admin · Customer
+factsStack: React, TypeScript, React Query, Stripe
+summary: A salon runs on its calendar. I built the screens that let front-desk staff juggle multi-service bookings and staff leave, and let customers book and pay without calling.
+cardTags: [React, TypeScript, Stripe, FullCalendar]
+stack: [React, TypeScript, Ant Design, React Query, Context API, FullCalendar, Stripe, Recharts, Vitest, React Testing Library, MSW]
+visual: calendar
+decisions:
+  - title: Staff leave as blocked time on the calendar
+    body: Showing leave directly in the scheduler stopped the front desk from booking someone who was off.
+  - title: Server state in React Query, UI state in Context
+    body: API data was cached and refetched on its own. Context held only what the screen needed, which kept re-renders low on a busy calendar.
+  - title: Mock the network in tests
+    body: MSW let the booking and payment flows be tested end to end in Vitest without a backend.
+result: Three production apps shipped over about a year. Salons run bookings, payments and staff schedules from one product.
 order: 1
 ---
 
 ## The problem
 
-Front-desk staff juggled appointments across locations, staff rosters and service menus. The calendar had to stay fast with a busy day of bookings on screen.
+One booking can include several services, each needing a different staff member, while staff take leave and walk-ins arrive. The product had to make that juggling feel simple for the front desk, and let customers book and pay without calling.
 
-## What I built
+## What I did
 
-- A day/week calendar view for appointments across staff members
-- Booking flows for services, staff and time slots, with validation
-- Shared, reusable form and table components used across the admin app
-
-## Key decisions
-
-{/* TODO(Boopathi): confirm the real decisions before publishing */}
-- Server state in TanStack Query, UI state in Zustand, so the calendar refetches without losing the user's view.
-
-## Outcome
-
-{/* TODO(Boopathi): add a real number if you have one */}
-Used daily by front-desk staff to run bookings.
+- Built the booking flow with check-in and check-out across all three apps.
+- Built the staff scheduler on FullCalendar. One booking can hold several services, staff leave shows as blocked time, and custom popovers let the front desk act without leaving the calendar.
+- Integrated **Stripe Connect** for online payments and **Stripe Terminal** for in-store card readers, plus Google and Facebook sign-in.
+- Built marketing campaigns on 3 email templates, role-based access for staff, and Recharts dashboards for bookings and sales.
+- Built the service-management form with infinite scroll and a "copy service" shortcut for salons with long menus.

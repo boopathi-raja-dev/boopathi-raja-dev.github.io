@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { About } from "~/components/sections/About";
 import { Contact } from "~/components/sections/Contact";
-import { Experience } from "~/components/sections/Experience";
+import { ExperienceAbout } from "~/components/sections/ExperienceAbout";
 import { Hero } from "~/components/sections/Hero";
 import { Projects } from "~/components/sections/Projects";
 import { ProofStrip } from "~/components/sections/ProofStrip";
@@ -20,8 +19,7 @@ function Home() {
       <WorkCards />
       <Projects />
       <Skills />
-      <Experience />
-      <About />
+      <ExperienceAbout />
       <Contact />
     </>
   );

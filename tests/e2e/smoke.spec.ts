@@ -17,6 +17,6 @@ for (const path of pages) {
 
 test("work card navigates to its case study", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: /Salon booking platform/ }).click();
+  await page.getByRole("link", { name: /Booking, scheduling and payments/ }).click();
   await expect(page).toHaveURL(/\/work\/salon-booking/);
 });

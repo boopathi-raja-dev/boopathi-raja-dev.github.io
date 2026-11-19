@@ -4,7 +4,7 @@ type SeoInput = { title?: string; description?: string; path?: string };
 
 /** Builds the <head> meta tags for a page. */
 export function seo({ title, description = site.description, path = "/" }: SeoInput = {}) {
-  const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.role}`;
+  const fullTitle = title ? `${title} · ${site.name}` : site.title;
   const url = new URL(path, site.url).toString();
   return [
     { title: fullTitle },

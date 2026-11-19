@@ -8,10 +8,11 @@ import type { Site } from "./site.schema";
 export const site = {
   name: "Boopathi Raja",
   role: "Frontend Engineer",
+  title: "Boopathi Raja — Frontend Engineer (React, TypeScript, AWS)",
   location: "Chennai, India",
   url: "https://boopathi-raja-dev.github.io",
   description:
-    "Frontend engineer building React + TypeScript products — booking systems, ERPs and storefronts — that people enjoy using.",
+    "Frontend engineer in Chennai building React + TypeScript apps for SaaS, ERP and e-commerce. AWS Certified Solutions Architect. See my work and get in touch.",
   email: "boopathiraj948@gmail.com",
   links: {
     github: "https://github.com/boopathi-raja-dev",
@@ -31,57 +32,74 @@ export const site = {
   projects: [
     {
       name: "TanStack Invoice Dashboard",
-      blurb: "Invoicing dashboard on TanStack Router + Query with typed forms and tables.",
-      stack: ["React", "TypeScript", "TanStack"],
-      repo: "https://github.com/boopathi-raja-dev/tanstack-invoice-dashboard",
+      blurb:
+        "Protected routes, Zod-validated forms and a cached API layer. Customers module done, invoices in progress.",
+      stack: "React · TanStack · Zod · shadcn/ui",
+      href: "https://github.com/boopathi-raja-dev/tanstack-invoice-dashboard",
+      linkLabel: "GitHub ↗",
+    },
+    {
+      name: "terraform-provider-reactenv",
+      blurb:
+        "A custom Terraform provider in Go that passes environment variables into Terraform resources for React deployments.",
+      stack: "Go · Terraform",
+      href: "https://github.com/boopathi-raja-dev/terraform-provider-reactenv",
+      linkLabel: "GitHub ↗",
     },
     {
       name: "Trello Clone",
-      blurb: "Boards, lists and cards with drag interactions, built during internship training.",
-      stack: ["React", "TypeScript", "Ant Design"],
-      repo: "https://github.com/boopathi-raja-dev/trello-clone-react",
+      blurb: "A Trello-style board with lists, cards and drag-to-move, built during my training.",
+      stack: "React · TypeScript · Ant Design",
+      href: "https://github.com/boopathi-raja-dev/trello-clone-react",
+      linkLabel: "GitHub ↗",
     },
     {
-      name: "Terraform Provider: ReactEnv",
-      blurb: "A small custom Terraform provider exploring infra-as-code for frontend env config.",
-      stack: ["Go", "Terraform"],
-      repo: "https://github.com/boopathi-raja-dev/terraform-provider-reactenv",
-    },
-    {
-      name: "Marvel API Explorer",
+      name: "This site",
       blurb:
-        "Search and browse Marvel characters with a vanilla JS client and paginated API calls.",
-      stack: ["JavaScript", "REST"],
-      repo: "https://github.com/boopathi-raja-dev/marvel-api-explorer",
+        "TanStack Start, prerendered to static HTML. A GitHub Actions pipeline runs tests, accessibility and Lighthouse checks, and deploys only when they all pass.",
+      stack: "TanStack Start · GitHub Actions",
+      href: "https://github.com/boopathi-raja-dev/boopathi-raja-dev.github.io",
+      linkLabel: "Source ↗",
+      dashed: true,
     },
   ],
   skills: [
-    { group: "Core", items: ["React", "TypeScript", "JavaScript", "HTML", "CSS"] },
-    { group: "State & data", items: ["TanStack Query", "Zustand", "Redux", "React Hook Form"] },
-    { group: "UI", items: ["Ant Design", "Tailwind CSS", "Storybook"] },
-    { group: "Testing", items: ["Vitest", "React Testing Library"] },
     {
-      group: "Cloud & delivery",
-      items: ["AWS S3", "CloudFront", "Route 53", "Terraform", "GitHub Actions", "GitLab CI"],
+      group: "Frontend",
+      items: "React, Next.js, Angular, TypeScript, JavaScript, HTML5, CSS3, SCSS",
     },
+    {
+      group: "State & data",
+      items:
+        "Redux, Zustand, Context API, TanStack Query / Router / Virtual, React Hook Form, Zod, RxJS, NgRx",
+    },
+    { group: "UI", items: "Ant Design, shadcn/ui, Tailwind CSS, Motion" },
+    { group: "Testing", items: "Vitest, Jest, React Testing Library, MSW, Jasmine, Storybook" },
+    {
+      group: "Cloud & DevOps",
+      items:
+        "AWS (S3, CloudFront, Route 53, Cognito), Terraform, GitHub Actions, GitLab CI/CD, Azure Pipelines",
+    },
+    { group: "Backend", items: "Learning: Node.js, NestJS, Express, PostgreSQL, TypeORM" },
   ],
   experience: [
     {
-      company: "RootQuotient Technologies",
+      period: "Jun 2024 – Present",
       title: "Software Development Engineer I",
-      period: "Jun 2024 — Present",
-      points: [
-        "Built and maintained React + TypeScript frontends for booking, ERP and residency-management products.",
-        "Set up CI/CD pipelines deploying dev, UAT and prod builds to S3 + CloudFront.",
-      ],
+      org: "RootQuotient",
+      line: "Frontend on 5 client products in React, Angular and TypeScript; CI/CD to AWS; 85%+ test coverage.",
     },
     {
-      company: "RootQuotient Technologies",
-      title: "Software Engineering Intern",
-      period: "Dec 2023 — May 2024",
-      points: [
-        "Frontend training track: HTML/CSS, vanilla JS, then React + TypeScript + Ant Design.",
-      ],
+      period: "Dec 2023 – May 2024",
+      title: "Software Engineer Intern",
+      org: "RootQuotient",
+      line: "Frontend training, then rebuilt a money-transfer site's landing page with Stripe. Converted to full-time in 6 months.",
+    },
+    {
+      period: "2020 – 2024",
+      title: "B.E. Computer Science",
+      org: "Karpagam College of Engineering",
+      line: "CGPA 9.05 / 10",
     },
   ],
   certifications: [
@@ -89,9 +107,14 @@ export const site = {
     "AWS Certified Cloud Practitioner",
   ],
   about: [
-    "I'm a frontend engineer from Tamil Nadu, now based in Chennai. I like the part of the job where a messy business process becomes a screen people actually understand.",
-    "Most of my work has been data-heavy apps — calendars, inventories, multi-step forms — where performance and clarity matter more than flash.",
+    "I'm Boopathi, a frontend engineer from Karur, Tamil Nadu. I like the part of software people actually touch: turning a messy workflow into a screen that feels obvious.",
+    "At RootQuotient I went from intern to SDE-1, shipping booking systems, a student-housing platform, an e-commerce storefront for a global flooring brand and a greenfield ERP. Along the way I picked up AWS (now certified as a Solutions Architect) and CI/CD, and started learning backend with Node.js and NestJS.",
+    "Outside work, I'm sharpening DSA.",
   ],
+  contact: {
+    heading: "Let's build something people enjoy using.",
+    line: "Open to conversations about frontend roles in Chennai and remote. The fastest way to reach me is email.",
+  },
   nav: [
     { label: "Work", href: "/#work" },
     { label: "Projects", href: "/#projects" },

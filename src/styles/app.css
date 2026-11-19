@@ -71,13 +71,16 @@
     @apply mx-auto max-w-6xl px-6;
   }
   .prose-case h2 {
-    @apply font-display text-2xl font-semibold text-fog-100 mt-12 mb-4;
+    @apply font-display text-[28px] font-semibold text-white mt-12 mb-4 first:mt-0;
   }
   .prose-case p {
-    @apply text-fog-300 leading-relaxed mb-4;
+    @apply text-fog-200 text-lg leading-relaxed mb-4;
   }
   .prose-case ul {
-    @apply list-disc pl-5 space-y-2 text-fog-300 mb-4;
+    @apply list-disc pl-5 space-y-2.5 text-fog-200 leading-relaxed marker:text-accent;
+  }
+  .prose-case strong {
+    @apply font-semibold text-white;
   }
 }
 

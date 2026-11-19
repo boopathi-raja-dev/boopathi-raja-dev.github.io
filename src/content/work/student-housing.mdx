@@ -1,31 +1,34 @@
 ---
-title: Student housing management
-category: Property & residency
-summary: A residency management app for college students — rooms, residents, bookings and payments in one place.
-duration: Ongoing
+title: Bed-level allocation, secure documents and role-based access
+label: Student housing platform
+durationShort: ~6 months
+duration: About 6 months
 role: Frontend engineer
-apps: Admin web app
-stack: [React, TypeScript, Ant Design, React Hook Form, TanStack Query]
-tags: [Dashboards, Forms, Data tables]
+apps: Admin · Customer
+factsStack: React 19, TypeScript, Zustand, AWS Cognito
+summary: Student residences rent by the bed, not the building. I built the admin and student apps that track every bed, handle documents from a phone, and give each staff role exactly the access it needs.
+cardTags: [React 19, AWS Cognito, Zustand, TanStack]
+stack: [React 19, TypeScript, Ant Design, Zustand, TanStack Query, TanStack Virtual, AWS Cognito, Amazon S3, Vitest]
+visual: hierarchy
+decisions:
+  - title: Permissions as data
+    body: Access rules were dot-separated permission strings (like residents.edit), checked by a usePermission hook and a RequireAuth route guard, backed by a small Zustand auth store. Adding a role meant adding strings, not rewriting screens.
+  - title: Convert files before upload, not after
+    body: Converting HEIC to JPEG and validating PDFs in the browser caught bad files before they reached S3, so admins never opened a document they couldn't read.
+  - title: Break up large components
+    body: I refactored oversized screens into custom hooks and smaller files, which made them testable and fixed a race condition in debounced auto-save along the way.
+result: Admins manage allocation down to the individual bed, and students upload documents straight from their phones.
 order: 2
 ---
 
 ## The problem
 
-Housing staff tracked rooms, residents and payments across spreadsheets. They needed one admin app with clear status at a glance.
+Admins needed to see every apartment, floor, room and bed, move students between them, and manage waitlists. Students needed to upload identity and guardian documents from their phones. Different staff roles needed different powers.
 
-## What I built
+## What I did
 
-- Room and resident management screens with filterable data tables
-- Multi-step forms with React Hook Form and schema validation
-- Status dashboards for occupancy and pending actions
-
-## Key decisions
-
-{/* TODO(Boopathi): confirm the real decisions before publishing */}
-- Typed form schemas shared between create and edit flows.
-
-## Outcome
-
-{/* TODO(Boopathi): add a real number if you have one */}
-Replaced spreadsheet tracking for the housing team.
+- Modelled a 4-level hierarchy (apartment → floor → room → bed) with waitlist allocation and room swaps.
+- Built S3 uploads for 3 document types, with PDF validation, HEIC-to-JPEG conversion for iPhone photos, and image cropping.
+- Secured sign-in with AWS Cognito, MFA and a multi-step OTP verification flow.
+- Rendered long resident lists with virtualised infinite scroll.
+- Held test coverage above 85%.
