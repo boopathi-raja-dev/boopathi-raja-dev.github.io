@@ -4,6 +4,7 @@ import { domAnimation, LazyMotion } from "motion/react";
 import type { ReactNode } from "react";
 import { Footer } from "~/components/layout/Footer";
 import { Nav } from "~/components/layout/Nav";
+import { Spotlight } from "~/components/ui/Spotlight";
 import { seo } from "~/lib/seo";
 import appCss from "~/styles/app.css?url";
 
@@ -46,11 +47,14 @@ function RootDocument({ children }: { children: ReactNode }) {
           Skip to content
         </a>
         <LazyMotion features={domAnimation} strict>
+          <Spotlight />
           <Nav />
-          <main id="main" className="mx-auto max-w-6xl px-6">
+          <main id="main" className="relative z-10">
             {children}
           </main>
-          <Footer />
+          <div className="relative z-10">
+            <Footer />
+          </div>
         </LazyMotion>
         <Scripts />
       </body>

@@ -1,4 +1,4 @@
-import { AnimatePresence, m, useInView } from "motion/react";
+import { AnimatePresence, m, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import { site } from "~/content/site";
 import { useTypewriter } from "~/hooks/useTypewriter";
@@ -20,89 +20,81 @@ const TOKEN_CLASS: Record<TokenKind, string> = {
   tag: "text-accent",
   component: "text-[#ffcb6b]",
   attr: "text-[#f78c6c]",
-  punct: "text-fog-500",
+  punct: "text-fog-400",
   plain: "text-fog-100",
 };
 
-const STACK = ["React", "TypeScript", "AWS"];
-
 export function HeroEditor() {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const inView = useInView(ref, { once: true, amount: 0.4 });
-  const { output, done } = useTypewriter(CODE, { enabled: inView });
-  const lineCount = CODE.split("\n").length;
+  const { output, done } = useTypewriter(CODE, { speed: 32, enabled: inView });
 
   return (
-    <figure
+    <m.figure
       ref={ref}
       aria-label={`Code sample: a React component describing ${site.name}, a frontend engineer in Chennai working with React, TypeScript and AWS.`}
-      className="relative mb-16 lg:mb-0"
+      // Gentle idle float, as in the design.
+      animate={reduce ? undefined : { y: [0, -8, 0] }}
+      transition={{ duration: 6, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
+      className="overflow-hidden rounded-[14px] border border-[#24344f] bg-ink-975 shadow-[0_30px_60px_rgb(0_0_0/0.45)]"
     >
-      <div
-        aria-hidden="true"
-        className="overflow-hidden rounded-2xl border border-ink-700 bg-ink-900/90 shadow-2xl shadow-black/40 backdrop-blur"
-      >
+      <div aria-hidden="true">
         {/* Window chrome */}
-        <div className="flex items-center gap-2 border-b border-ink-800 px-4 py-3">
-          <span className="size-3 rounded-full bg-[#ff5f57]" />
-          <span className="size-3 rounded-full bg-[#febc2e]" />
-          <span className="size-3 rounded-full bg-[#28c840]" />
-          <span className="ml-3 font-mono text-xs text-fog-500">Engineer.tsx</span>
+        <div className="flex items-center gap-2 border-b border-line bg-ink-900 px-4 py-3">
+          <span className="size-[11px] rounded-full bg-[#f87171]" />
+          <span className="size-[11px] rounded-full bg-[#fbbf24]" />
+          <span className="size-[11px] rounded-full bg-[#34d399]" />
+          <span className="ml-2.5 font-mono text-xs text-fog-400">Engineer.tsx</span>
         </div>
 
-        <div className="flex px-4 py-5 font-mono text-[12px] leading-6 sm:text-sm">
-          <ol className="mr-4 select-none text-right text-fog-500/50">
-            {Array.from({ length: lineCount }, (_, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: line numbers are static
-              <li key={i}>{i + 1}</li>
+        {/* Two layers in one grid cell: the invisible full code reserves space (no layout shift),
+            the typed code draws on top of it. */}
+        <pre className="grid min-h-[230px] overflow-x-auto px-5 pt-5 pb-2 font-mono text-[13px] leading-[1.7] sm:text-sm">
+          <code className="invisible col-start-1 row-start-1 whitespace-pre">{CODE}</code>
+          <code className="col-start-1 row-start-1 whitespace-pre">
+            {highlight(output).map((t, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: tokens are re-derived from text each render
+              <span key={i} className={TOKEN_CLASS[t.kind]}>
+                {t.value}
+              </span>
             ))}
-          </ol>
+            <span
+              className={cn(
+                "ml-px inline-block h-[18px] w-[9px] translate-y-[3px] bg-accent",
+                done && "animate-pulse",
+              )}
+            />
+          </code>
+        </pre>
 
-          {/* Two layers in one grid cell: the invisible full code reserves space (no layout shift),
-              the typed code draws on top of it. */}
-          <pre className="grid flex-1 overflow-x-auto">
-            <code className="invisible col-start-1 row-start-1 whitespace-pre">{CODE}</code>
-            <code className="col-start-1 row-start-1 whitespace-pre">
-              {highlight(output).map((t, i) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: tokens are re-derived from text each render
-                <span key={i} className={TOKEN_CLASS[t.kind]}>
-                  {t.value}
-                </span>
-              ))}
-              <span
-                className={cn(
-                  "ml-px inline-block h-[1.1em] w-[2px] translate-y-[3px] bg-accent",
-                  done ? "animate-pulse" : "",
-                )}
-              />
-            </code>
-          </pre>
+        {/* "Rendered" result appears once typing finishes. Its space is reserved to avoid a jump. */}
+        <div className="h-[82px] px-4 pb-4">
+          <AnimatePresence>
+            {done ? (
+              <m.div
+                initial={reduce ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
+                className="flex items-center gap-3 rounded-[10px] border border-[#24344f] bg-[#13213a] px-3.5 py-3"
+              >
+                <img
+                  src="/avatar.webp"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="size-10 rounded-full object-cover"
+                />
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <span className="text-sm font-semibold text-white">{site.name}</span>
+                  <span className="text-xs text-fog-400">React · TypeScript · AWS</span>
+                </div>
+                <span className="font-mono text-xs text-[#34d399]">✓ Rendered</span>
+              </m.div>
+            ) : null}
+          </AnimatePresence>
         </div>
       </div>
-
-      {/* "Rendered" preview pops in once typing finishes */}
-      <AnimatePresence>
-        {done ? (
-          <m.div
-            aria-hidden="true"
-            initial={{ opacity: 0, y: 16, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="absolute -right-2 -bottom-20 w-60 rounded-xl border border-accent/30 bg-ink-800/95 p-4 shadow-xl shadow-black/40 backdrop-blur"
-          >
-            <p className="font-mono text-xs text-[#28c840]">✓ Rendered</p>
-            <p className="mt-2 font-display text-lg font-semibold">{site.name}</p>
-            <p className="text-sm text-fog-300">Frontend Engineer · Chennai</p>
-            <div className="mt-3 flex gap-1.5">
-              {STACK.map((s) => (
-                <span key={s} className="rounded bg-ink-950 px-2 py-0.5 text-xs text-accent">
-                  {s}
-                </span>
-              ))}
-            </div>
-          </m.div>
-        ) : null}
-      </AnimatePresence>
-    </figure>
+    </m.figure>
   );
 }

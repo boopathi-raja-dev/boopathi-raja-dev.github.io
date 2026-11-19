@@ -15,7 +15,16 @@ export const siteSchema = z.object({
     headline: z.string(),
     sub: z.string(),
   }),
-  proof: z.array(z.object({ value: z.number(), suffix: z.string(), label: z.string() })).length(4),
+  proof: z
+    .array(
+      z.object({
+        value: z.number(),
+        prefix: z.string().default(""),
+        suffix: z.string().default(""),
+        label: z.string(),
+      }),
+    )
+    .length(4),
   projects: z.array(
     z.object({
       name: z.string(),
@@ -60,13 +69,13 @@ export const site: Site = siteSchema.parse({
   hero: {
     eyebrow: "Frontend Engineer · Chennai",
     headline: "I build the frontends complex businesses run on.",
-    sub: "React, TypeScript and AWS. 2.5 years shipping booking platforms, ERPs and storefronts for real clients.",
+    sub: "React and TypeScript engineer with nearly 3 years shipping SaaS, ERP and e-commerce products. AWS Certified Solutions Architect, growing into full-stack.",
   },
   proof: [
-    { value: 6, suffix: "+", label: "production apps shipped" },
-    { value: 50, suffix: "+", label: "screens built" },
-    { value: 20, suffix: "+", label: "reusable components" },
-    { value: 85, suffix: "%", label: "test coverage on core modules" },
+    { value: 6, label: "client products shipped" },
+    { value: 50, suffix: "+", label: "countries served by a money-transfer site I rebuilt" },
+    { value: 20, prefix: "+", label: "Lighthouse points from SSR and performance work" },
+    { value: 85, suffix: "%+", label: "test coverage held with Vitest + RTL" },
   ],
   projects: [
     {
@@ -135,7 +144,8 @@ export const site: Site = siteSchema.parse({
   nav: [
     { label: "Work", href: "/#work" },
     { label: "Projects", href: "/#projects" },
-    { label: "About", href: "/#about" },
+    { label: "Skills", href: "/#skills" },
+    { label: "Experience", href: "/#experience" },
     { label: "Contact", href: "/#contact" },
   ],
 });
