@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const reduced = vi.hoisted(() => ({ value: false }));
-vi.mock("motion/react", () => ({ useReducedMotion: () => reduced.value }));
+vi.mock("~/hooks/useReducedMotion", () => ({ useReducedMotion: () => reduced.value }));
 
 import { useTypewriter } from "~/hooks/useTypewriter";
 

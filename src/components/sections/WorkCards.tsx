@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { allCaseStudies } from "content-collections";
-import { useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Section } from "~/components/ui/Section";
 import { CaseVisual } from "~/components/work/CaseVisual";
+import { useInView } from "~/hooks/useInView";
+import { stagger } from "~/lib/stagger";
 
 type Study = (typeof allCaseStudies)[number];
 
@@ -11,15 +12,10 @@ export const studiesInOrder = () => [...allCaseStudies].sort((a, b) => a.order -
 
 export function WorkCards() {
   return (
-    <Section
-      id="work"
-      eyebrow="01 / Selected work"
-      title="Products I helped ship"
-      className="pt-24"
-    >
+    <Section id="work" eyebrow="01 / Selected work" title="Products I helped ship" first>
       <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
-        {studiesInOrder().map((study) => (
-          <li key={study.slug} className="flex">
+        {studiesInOrder().map((study, i) => (
+          <li key={study.slug} className="reveal flex" style={stagger(i)}>
             <WorkCard study={study} />
           </li>
         ))}
@@ -32,7 +28,7 @@ function WorkCard({ study }: { study: Study }) {
   const ref = useRef<HTMLAnchorElement>(null);
   // Plays one cycle when the card first scrolls into view, then loops only while hovered/focused,
   // so three animations never compete with reading.
-  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const inView = useInView(ref, 0.5);
   const [intro, setIntro] = useState(false);
   const [hover, setHover] = useState(false);
 

@@ -1,6 +1,5 @@
 /// <reference types="vite/client" />
 import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
-import { domAnimation, LazyMotion } from "motion/react";
 import type { ReactNode } from "react";
 import { Footer } from "~/components/layout/Footer";
 import { Nav } from "~/components/layout/Nav";
@@ -46,16 +45,14 @@ function RootDocument({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <LazyMotion features={domAnimation} strict>
-          <Spotlight />
-          <Nav />
-          <main id="main" className="relative z-10">
-            {children}
-          </main>
-          <div className="relative z-10">
-            <Footer />
-          </div>
-        </LazyMotion>
+        <Spotlight />
+        <Nav />
+        <main id="main" className="relative z-10">
+          {children}
+        </main>
+        <div className="relative z-10">
+          <Footer />
+        </div>
         <Scripts />
       </body>
     </html>

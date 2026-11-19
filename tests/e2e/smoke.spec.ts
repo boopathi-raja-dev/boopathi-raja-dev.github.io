@@ -10,6 +10,9 @@ for (const path of pages) {
     // Let entrance animations settle so axe checks the final colours, not a mid-fade frame.
     const words = page.locator("h1 span");
     if ((await words.count()) > 0) await expect(words.last()).toHaveCSS("opacity", "1");
+    // Scan the settled page: scroll-reveal fades are decorative and would make
+    // half-faded text look like a contrast failure at the viewport edge.
+    await page.emulateMedia({ reducedMotion: "reduce" });
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
     expect(results.violations).toEqual([]);
   });

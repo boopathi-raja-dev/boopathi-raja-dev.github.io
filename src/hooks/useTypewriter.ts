@@ -1,5 +1,5 @@
-import { useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "~/hooks/useReducedMotion";
 
 type Options = {
   /** Milliseconds per character. */
