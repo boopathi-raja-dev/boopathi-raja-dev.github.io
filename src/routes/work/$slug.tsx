@@ -134,6 +134,22 @@ function CaseStudyPage() {
             </h2>
             <p className="text-lg leading-relaxed text-fog-200">{study.result}</p>
           </section>
+
+          <section aria-labelledby="next-title" className="flex flex-col gap-4">
+            <h2 id="next-title" className="font-display text-[28px] font-semibold text-white">
+              What I'd improve next
+            </h2>
+            <ul className="flex flex-col gap-3">
+              {study.improvements.map((idea) => (
+                <li key={idea} className="flex gap-3 leading-relaxed text-fog-200">
+                  <span aria-hidden="true" className="mt-0.5 font-mono text-accent">
+                    →
+                  </span>
+                  {idea}
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
 
         <aside className="flex flex-col gap-5 self-start lg:sticky lg:top-24">

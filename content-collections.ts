@@ -31,6 +31,8 @@ const caseStudies = defineCollection({
     visual: z.enum(["calendar", "hierarchy", "bars"]),
     decisions: z.array(z.object({ title: z.string(), body: z.string() })).min(1),
     result: z.string(),
+    /** Honest next steps: ideas not yet built, shown under "What I'd improve next". */
+    improvements: z.array(z.string()).min(1).max(3),
     order: z.number().int(),
     content: z.string(),
   }),
