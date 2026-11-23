@@ -13,7 +13,7 @@ export const studiesInOrder = () => [...allCaseStudies].sort((a, b) => a.order -
 
 export function WorkCards() {
   return (
-    <Section id="work" eyebrow="01 / Selected work" title="Products I helped ship" first>
+    <Section id="work" eyebrow="01 / Selected work" title="Products I helped ship">
       <ul className="grid gap-6 md:grid-cols-2">
         {studiesInOrder().map((study, i) => (
           <li key={study.slug} className="reveal flex" style={stagger(i)}>
@@ -29,7 +29,7 @@ export function WorkCards() {
 /** The remaining client products, so every one of the "6 shipped" is visible. */
 function AlsoShipped() {
   return (
-    <div className="mt-4 flex flex-col gap-5">
+    <div className="mt-4 flex flex-col gap-5" data-inspect="AlsoShipped">
       <h3 className="reveal font-display text-xl font-semibold text-white">Also shipped</h3>
       <ul className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
         {site.alsoShipped.map((item, i) => (
@@ -68,6 +68,8 @@ function WorkCard({ study }: { study: Study }) {
       ref={ref}
       to="/work/$slug"
       params={{ slug: study.slug }}
+      data-inspect="WorkCard"
+      data-props={`study="${study.slug}"`}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
       onFocus={() => setHover(true)}

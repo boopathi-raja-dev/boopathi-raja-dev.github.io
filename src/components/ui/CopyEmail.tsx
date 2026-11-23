@@ -21,7 +21,11 @@ export function CopyEmail({ email }: { email: string }) {
   };
 
   return (
-    <div className="flex items-center gap-2 font-mono text-sm text-fog-200">
+    <div
+      className="flex items-center gap-2 font-mono text-sm text-fog-200"
+      data-inspect="CopyEmail"
+      data-props={`email="${email}"`}
+    >
       <span>{email}</span>
       <button
         type="button"

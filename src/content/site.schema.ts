@@ -26,6 +26,8 @@ export const siteSchema = z.object({
         prefix: z.string().optional(),
         suffix: z.string().optional(),
         label: z.string(),
+        /** Test-style name shown in the build-log strip, e.g. "products.shipped". */
+        check: z.string(),
       }),
     )
     .length(4),

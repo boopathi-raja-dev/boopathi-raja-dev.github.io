@@ -6,7 +6,10 @@ import { stagger } from "~/lib/stagger";
 export function Projects() {
   return (
     <Section id="projects" eyebrow="02 / Projects" title="Things I build on my own time">
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5">
+      <ul
+        className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5"
+        data-inspect="Projects"
+      >
         {site.projects.map((p, i) => (
           <li key={p.href} className="reveal flex" style={stagger(i)}>
             <a

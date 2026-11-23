@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Contact } from "~/components/sections/Contact";
 import { ExperienceAbout } from "~/components/sections/ExperienceAbout";
 import { Hero } from "~/components/sections/Hero";
+import { MessyToObvious } from "~/components/sections/MessyToObvious";
 import { Projects } from "~/components/sections/Projects";
 import { ProofStrip } from "~/components/sections/ProofStrip";
 import { Skills } from "~/components/sections/Skills";
@@ -21,6 +22,7 @@ function Home() {
     <>
       <Hero />
       <ProofStrip />
+      <MessyToObvious />
       <WorkCards />
       <Projects />
       <Skills />

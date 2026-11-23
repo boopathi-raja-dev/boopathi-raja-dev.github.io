@@ -25,10 +25,25 @@ export const site = {
     availability: "Open to frontend roles · Chennai or remote",
   },
   proof: [
-    { value: 6, label: "client products shipped" },
-    { value: 50, suffix: "+", label: "countries served by a money-transfer site I rebuilt" },
-    { value: 20, prefix: "+", label: "Lighthouse points from SSR and performance work" },
-    { value: 85, suffix: "%+", label: "test coverage held with Vitest + RTL" },
+    { value: 6, label: "client products shipped", check: "products.shipped" },
+    {
+      value: 50,
+      suffix: "+",
+      label: "countries served by a money-transfer site I rebuilt",
+      check: "countries.served",
+    },
+    {
+      value: 20,
+      prefix: "+",
+      label: "Lighthouse points from SSR and performance work",
+      check: "lighthouse.gain",
+    },
+    {
+      value: 85,
+      suffix: "%+",
+      label: "test coverage held with Vitest + RTL",
+      check: "coverage.held",
+    },
   ],
   /** The other client products behind "6 shipped", without full case studies. */
   alsoShipped: [

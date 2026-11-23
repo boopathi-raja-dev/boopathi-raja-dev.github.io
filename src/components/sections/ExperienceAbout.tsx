@@ -4,6 +4,7 @@ import { site } from "~/content/site";
 export function ExperienceAbout() {
   return (
     <section
+      data-inspect="ExperienceAbout"
       id="experience"
       aria-labelledby="experience-title"
       className="container-page flex scroll-mt-20 flex-wrap gap-12 py-12"

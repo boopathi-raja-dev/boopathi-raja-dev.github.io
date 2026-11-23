@@ -5,7 +5,7 @@ import { stagger } from "~/lib/stagger";
 export function Skills() {
   return (
     <Section id="skills" eyebrow="03 / Skills" title="What I work with">
-      <dl className="grid border-t border-line md:grid-cols-2 md:gap-x-6">
+      <dl className="grid border-t border-line md:grid-cols-2 md:gap-x-6" data-inspect="Skills">
         {site.skills.map((s, i) => (
           <div
             key={s.group}

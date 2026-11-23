@@ -15,6 +15,7 @@ export function Hero() {
 
   return (
     <section
+      data-inspect="Hero"
       aria-labelledby="hero-title"
       className="bg-grid relative overflow-hidden border-b border-line"
     >
@@ -77,7 +78,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div style={delay(0.4)} className="rise min-w-0">
+        <div style={delay(0.4)} className="rise min-w-0" data-inspect="HeroEditor">
           <HeroEditor />
         </div>
       </div>

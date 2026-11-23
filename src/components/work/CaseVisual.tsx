@@ -24,6 +24,8 @@ export function CaseVisual({ kind, play, loop = false, framed = true }: Props) {
   return (
     <div
       aria-hidden="true"
+      data-inspect="CaseVisual"
+      data-props={`kind="${kind}"`}
       className={cn(
         "flex h-[180px] items-center justify-center bg-[#13213a]",
         framed ? "border-b border-line" : "rounded-lg",

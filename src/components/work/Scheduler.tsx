@@ -39,6 +39,7 @@ export function Scheduler() {
       // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be keyboard-reachable
       tabIndex={0}
       aria-label="Staff scheduler illustration"
+      data-inspect="Scheduler"
       className="overflow-x-auto rounded-lg"
     >
       <div className="grid min-w-[560px] grid-cols-[90px_repeat(4,minmax(0,1fr))] gap-2 text-[13px]">

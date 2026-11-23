@@ -4,6 +4,7 @@ import { allCaseStudies } from "content-collections";
 import { ArrowLeft } from "lucide-react";
 import { CaseVisual } from "~/components/work/CaseVisual";
 import { Scheduler } from "~/components/work/Scheduler";
+import { StubFirstDemo } from "~/components/work/StubFirstDemo";
 import { site } from "~/content/site";
 import { canonical, seo } from "~/lib/seo";
 
@@ -35,7 +36,7 @@ const ILLUSTRATION_CAPTION = {
   calendar: "Staff scheduler",
   hierarchy: "Allocation hierarchy",
   bars: "Lighthouse score, before and after",
-  contract: "Stub-first workflow",
+  contract: "Stub-first workflow, try both modes",
 } as const;
 
 function CaseStudyPage() {
@@ -94,6 +95,8 @@ function CaseStudyPage() {
           <div className="p-5">
             {study.visual === "calendar" ? (
               <Scheduler />
+            ) : study.visual === "contract" ? (
+              <StubFirstDemo />
             ) : (
               <CaseVisual kind={study.visual} play loop framed={false} />
             )}
