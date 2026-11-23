@@ -3,6 +3,7 @@ import { allCaseStudies } from "content-collections";
 import { useEffect, useRef, useState } from "react";
 import { Section } from "~/components/ui/Section";
 import { CaseVisual } from "~/components/work/CaseVisual";
+import { site } from "~/content/site";
 import { useInView } from "~/hooks/useInView";
 import { stagger } from "~/lib/stagger";
 
@@ -13,14 +14,37 @@ export const studiesInOrder = () => [...allCaseStudies].sort((a, b) => a.order -
 export function WorkCards() {
   return (
     <Section id="work" eyebrow="01 / Selected work" title="Products I helped ship" first>
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+      <ul className="grid gap-6 md:grid-cols-2">
         {studiesInOrder().map((study, i) => (
           <li key={study.slug} className="reveal flex" style={stagger(i)}>
             <WorkCard study={study} />
           </li>
         ))}
       </ul>
+      <AlsoShipped />
     </Section>
+  );
+}
+
+/** The remaining client products, so every one of the "6 shipped" is visible. */
+function AlsoShipped() {
+  return (
+    <div className="mt-4 flex flex-col gap-5">
+      <h3 className="reveal font-display text-xl font-semibold text-white">Also shipped</h3>
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+        {site.alsoShipped.map((item, i) => (
+          <li
+            key={item.name}
+            className="reveal flex flex-col gap-3 rounded-[14px] border border-line bg-ink-900/60 p-6"
+            style={stagger(i)}
+          >
+            <h4 className="font-display text-[17px] font-semibold text-white">{item.name}</h4>
+            <p className="text-[15px] leading-relaxed text-fog-200">{item.line}</p>
+            <p className="mt-auto font-mono text-xs text-fog-400">{item.stack}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

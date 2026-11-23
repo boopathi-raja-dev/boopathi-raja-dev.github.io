@@ -13,7 +13,12 @@ export const siteSchema = z.object({
   description: z.string().max(160),
   email: z.email(),
   links: z.object({ github: z.url(), linkedin: z.url() }),
-  hero: z.object({ eyebrow: z.string(), headline: z.string(), sub: z.string() }),
+  hero: z.object({
+    eyebrow: z.string(),
+    headline: z.string(),
+    sub: z.string(),
+    availability: z.string(),
+  }),
   proof: z
     .array(
       z.object({
@@ -24,6 +29,7 @@ export const siteSchema = z.object({
       }),
     )
     .length(4),
+  alsoShipped: z.array(z.object({ name: z.string(), line: z.string(), stack: z.string() })).min(1),
   projects: z
     .array(
       z.object({

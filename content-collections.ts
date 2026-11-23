@@ -28,7 +28,7 @@ const caseStudies = defineCollection({
     cardTags: z.array(z.string()).min(1).max(4),
     /** Full stack, shown in the case-study sidebar. */
     stack: z.array(z.string()).min(1),
-    visual: z.enum(["calendar", "hierarchy", "bars"]),
+    visual: z.enum(["calendar", "hierarchy", "bars", "contract"]),
     decisions: z.array(z.object({ title: z.string(), body: z.string() })).min(1),
     result: z.string(),
     /** Honest next steps: ideas not yet built, shown under "What I'd improve next". */

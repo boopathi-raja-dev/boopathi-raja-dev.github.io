@@ -2,7 +2,13 @@ import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const pages = ["/", "/work/salon-booking/", "/work/student-housing/", "/work/flooring-storefront/"];
+const pages = [
+  "/",
+  "/work/salon-booking/",
+  "/work/student-housing/",
+  "/work/flooring-storefront/",
+  "/work/book-erp/",
+];
 
 for (const path of pages) {
   test(`${path} renders and has no a11y violations`, async ({ page }) => {

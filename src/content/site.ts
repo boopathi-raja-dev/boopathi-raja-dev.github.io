@@ -22,12 +22,26 @@ export const site = {
     eyebrow: "Frontend Engineer · Chennai",
     headline: "I build the frontends complex businesses run on.",
     sub: "React and TypeScript engineer with nearly 3 years shipping SaaS, ERP and e-commerce products. AWS Certified Solutions Architect, growing into full-stack.",
+    availability: "Open to frontend roles · Chennai or remote",
   },
   proof: [
     { value: 6, label: "client products shipped" },
     { value: 50, suffix: "+", label: "countries served by a money-transfer site I rebuilt" },
     { value: 20, prefix: "+", label: "Lighthouse points from SSR and performance work" },
     { value: 85, suffix: "%+", label: "test coverage held with Vitest + RTL" },
+  ],
+  /** The other client products behind "6 shipped", without full case studies. */
+  alsoShipped: [
+    {
+      name: "Product carbon footprint platform",
+      line: "Turned a complex carbon-footprint calculation into guided multi-step forms, with a real-time emissions dashboard.",
+      stack: "React · React Hook Form · Socket.io",
+    },
+    {
+      name: "Money-transfer website",
+      line: "Rebuilt the landing page for a service in 50+ countries, with Stripe payments in the sign-up flow.",
+      stack: "Next.js · TypeScript · Stripe",
+    },
   ],
   projects: [
     {

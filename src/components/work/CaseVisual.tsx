@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { useReducedMotion } from "~/hooks/useReducedMotion";
 import { cn } from "~/lib/cn";
 
-export type VisualKind = "calendar" | "hierarchy" | "bars";
+export type VisualKind = "calendar" | "hierarchy" | "bars" | "contract";
 
 type Props = {
   kind: VisualKind;
@@ -33,6 +33,7 @@ export function CaseVisual({ kind, play, loop = false, framed = true }: Props) {
       {kind === "calendar" && <Calendar {...anim} />}
       {kind === "hierarchy" && <Hierarchy {...anim} />}
       {kind === "bars" && <Bars {...anim} />}
+      {kind === "contract" && <Contract {...anim} />}
     </div>
   );
 }
@@ -107,6 +108,40 @@ function Bars({ run, count, still }: Anim) {
         />
         <span className="text-xs text-fog-100">+20</span>
       </div>
+    </div>
+  );
+}
+
+/** Stub-first: the shared stub lights first, then web and API build against it together. */
+function Contract({ run, count, still }: Anim) {
+  const side = (label: string) => (
+    <span
+      className="rounded-md border px-3 py-1.5"
+      style={{
+        borderColor: "#334155",
+        color: "#94a3b8",
+        ...animation(run, `node-glow 2.4s ease-in-out 0.7s ${count} both`),
+      }}
+    >
+      {label}
+    </span>
+  );
+  return (
+    <div className="flex items-center gap-2 font-mono text-xs">
+      {side("Web")}
+      <span className="w-6 border-t border-dashed border-[#334155]" />
+      <span
+        className="rounded-md border px-3 py-1.5"
+        style={{
+          borderColor: still ? ACCENT : "#334155",
+          color: still ? ACCENT : "#94a3b8",
+          ...animation(run, `node-glow 2.4s ease-in-out 0s ${count} both`),
+        }}
+      >
+        {"{ stub }"}
+      </span>
+      <span className="w-6 border-t border-dashed border-[#334155]" />
+      {side("API")}
     </div>
   );
 }

@@ -1,0 +1,40 @@
+---
+title: A shared contract so frontend and backend could build in parallel
+label: Book-distribution ERP
+durationShort: ~4 months
+duration: About 4 months
+role: Frontend engineer, contributing to the backend
+apps: Web · Mobile · Desktop · API
+factsStack: React, TanStack, Turborepo, NestJS
+summary: A greenfield ERP for a book distributor, replacing a legacy system. I set up the web app's foundation and proposed a stub-first workflow that the team adopted, so frontend and backend stopped redoing each other's work.
+cardTags: [React, TanStack, Turborepo, NestJS]
+stack: [React, TypeScript, TanStack Router, TanStack Query, shadcn/ui, Turborepo, pnpm, Husky, NestJS, Vitest]
+visual: contract
+decisions:
+  - title: Agree the stub before anyone builds
+    body: Frontend was building against API stubs that kept changing until the backend work merged, so both sides redid work. I proposed agreeing and stabilising each stub first, then building on both sides against it. I set up a team call to walk through the problem, and the team adopted it.
+  - title: A foundation sprint before features
+    body: The first plan split development module by module from day one. I proposed spending the first sprint on shared setup instead, so every module after it would start from the same base. The team adopted this too.
+  - title: Checks in Git hooks, not in review
+    body: On my own initiative, I added Husky hooks across the monorepo so lint and test checks run before code is pushed. Reviewers could then spend their time on logic instead of formatting.
+result: The team adopted both proposals. Stubs were agreed before work started, the first sprint went to shared setup, and integration rework dropped. We didn't measure by how much.
+improvements:
+  - Add contract tests that check real API responses against the agreed stub automatically.
+  - Introduce lightweight estimation. The team had no formal planning process, and I flagged it as a gap.
+  - Own a NestJS module end to end, to go from contributing to backend code to designing it.
+order: 4
+---
+
+## The problem
+
+A book distributor was replacing a legacy ERP with a new monorepo: web, mobile and desktop apps plus an API, with Indian tax support such as GST and e-way bills. Frontend and backend teams were building the same features at the same time, and their work kept colliding at the API boundary.
+
+## What I did
+
+- Set up the web app's foundation: file-based TanStack Router with auth-guarded routes, a TanStack Query data layer, and the shadcn/ui theme and shared layout.
+- Chose shadcn/ui with a teammate after comparing the options, and documented the decision.
+- Added Husky hooks across the monorepo, unasked.
+- Proposed the stub-first workflow and the foundation sprint, and walked the team through both.
+- Reviewed teammates' pull requests, and onboarded a new frontend teammate as their buddy.
+- Contributed to shared NestJS backend modules, test-first, in a hexagonal codebase.
+- Worked on-site with the client's team, with two or three calls a day.

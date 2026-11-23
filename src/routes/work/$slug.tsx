@@ -35,6 +35,7 @@ const ILLUSTRATION_CAPTION = {
   calendar: "Staff scheduler",
   hierarchy: "Allocation hierarchy",
   bars: "Lighthouse score, before and after",
+  contract: "Stub-first workflow",
 } as const;
 
 function CaseStudyPage() {

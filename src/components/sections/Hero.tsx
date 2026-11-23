@@ -48,6 +48,14 @@ export function Hero() {
             {site.hero.sub}
           </p>
 
+          <p
+            style={delay(0.82)}
+            className="rise inline-flex w-fit items-center gap-2.5 rounded-full border border-line bg-ink-900/70 px-3.5 py-1.5 text-sm text-fog-200"
+          >
+            <span aria-hidden="true" className="size-2 rounded-full bg-[#4ade80]" />
+            {site.hero.availability}
+          </p>
+
           <div style={delay(0.9)} className="rise mt-2 flex flex-wrap gap-3">
             <a
               href="#work"
