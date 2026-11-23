@@ -13,6 +13,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0B1424" },
+      { name: "google-site-verification", content: "gcqPa040LjR0WFyT5uieqbOd5ca3xyNU2JseN7KdmIA" },
       ...seo(),
     ],
     links: [
