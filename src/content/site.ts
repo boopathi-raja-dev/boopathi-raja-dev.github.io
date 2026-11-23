@@ -84,7 +84,7 @@ export const site = {
   ],
   experience: [
     {
-      period: "Jun 2024 – Present",
+      period: "Jun 2024 – Oct 2026",
       title: "Software Development Engineer I",
       org: "RootQuotient",
       line: "Frontend on 5 client products in React, Angular and TypeScript; CI/CD to AWS; 85%+ test coverage.",
