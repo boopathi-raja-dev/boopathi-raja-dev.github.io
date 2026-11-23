@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { CommandMenu } from "~/components/layout/CommandMenu";
 import { Footer } from "~/components/layout/Footer";
 import { Nav } from "~/components/layout/Nav";
 import { Spotlight } from "~/components/ui/Spotlight";
@@ -48,6 +49,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         </a>
         <Spotlight />
         <Nav />
+        <CommandMenu />
         <main id="main" className="relative z-10">
           {children}
         </main>
