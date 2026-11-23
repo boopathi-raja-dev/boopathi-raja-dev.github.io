@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
@@ -22,4 +23,14 @@ test("work card navigates to its case study", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: /Booking, scheduling and payments/ }).click();
   await expect(page).toHaveURL(/\/work\/salon-booking/);
+});
+
+test("static files are served byte-for-byte from public/", async ({ request }) => {
+  for (const file of ["resume.pdf", "og.png"]) {
+    const res = await request.get(`/${file}`);
+    expect(res.ok()).toBe(true);
+    const served = await res.body();
+    const source = readFileSync(new URL(`../../public/${file}`, import.meta.url));
+    expect(served.equals(source), `${file} differs from public/${file}`).toBe(true);
+  }
 });

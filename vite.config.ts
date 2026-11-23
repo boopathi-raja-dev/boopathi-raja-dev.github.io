@@ -17,6 +17,9 @@ export default defineConfig({
         crawlLinks: true,
         autoSubfolderIndex: true,
         failOnError: true,
+        // Only crawl pages. Files like /resume.pdf are copied from public/
+        // as-is; prerendering them would re-save the bytes as text.
+        filter: ({ path }) => !/\.[a-z0-9]+$/i.test(path),
       },
     }),
     // React's plugin must come after TanStack Start's plugin.
