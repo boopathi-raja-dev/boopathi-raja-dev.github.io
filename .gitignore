@@ -11,3 +11,6 @@ coverage
 .env*
 !.env.example
 .DS_Store
+
+# resume source stays local; only public/resume.pdf is published
+resume/
